@@ -12,10 +12,21 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
+import { Route as AuthenticatedServicosRouteImport } from './routes/_authenticated/servicos'
+import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
+import { Route as AuthenticatedNotificacoesRouteImport } from './routes/_authenticated/notificacoes'
+import { Route as AuthenticatedFaturasRouteImport } from './routes/_authenticated/faturas'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedApiKeysRouteImport } from './routes/_authenticated/api-keys'
 
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
@@ -30,6 +41,16 @@ const StatusRoute = StatusRouteImport.update({
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
@@ -47,75 +68,186 @@ const ContatoRoute = ContatoRouteImport.update({
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedServicosRoute = AuthenticatedServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPerfilRoute = AuthenticatedPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedNotificacoesRoute =
+  AuthenticatedNotificacoesRouteImport.update({
+    id: '/notificacoes',
+    path: '/notificacoes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFaturasRoute = AuthenticatedFaturasRouteImport.update({
+  id: '/faturas',
+  path: '/faturas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedApiKeysRoute = AuthenticatedApiKeysRouteImport.update({
+  id: '/api-keys',
+  path: '/api-keys',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/planos': typeof PlanosRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/status': typeof StatusRoute
   '/termos': typeof TermosRoute
+  '/api-keys': typeof AuthenticatedApiKeysRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/faturas': typeof AuthenticatedFaturasRoute
+  '/notificacoes': typeof AuthenticatedNotificacoesRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
+  '/servicos': typeof AuthenticatedServicosRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/planos': typeof PlanosRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/status': typeof StatusRoute
   '/termos': typeof TermosRoute
+  '/api-keys': typeof AuthenticatedApiKeysRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/faturas': typeof AuthenticatedFaturasRoute
+  '/notificacoes': typeof AuthenticatedNotificacoesRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
+  '/servicos': typeof AuthenticatedServicosRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/planos': typeof PlanosRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/status': typeof StatusRoute
   '/termos': typeof TermosRoute
+  '/_authenticated/api-keys': typeof AuthenticatedApiKeysRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/faturas': typeof AuthenticatedFaturasRoute
+  '/_authenticated/notificacoes': typeof AuthenticatedNotificacoesRoute
+  '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
+  '/_authenticated/servicos': typeof AuthenticatedServicosRoute
+  '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/contato'
     | '/planos'
     | '/privacidade'
+    | '/reset-password'
+    | '/sitemap.xml'
     | '/sobre'
     | '/status'
     | '/termos'
+    | '/api-keys'
+    | '/dashboard'
+    | '/faturas'
+    | '/notificacoes'
+    | '/perfil'
+    | '/servicos'
+    | '/tickets'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/contato'
     | '/planos'
     | '/privacidade'
+    | '/reset-password'
+    | '/sitemap.xml'
     | '/sobre'
     | '/status'
     | '/termos'
+    | '/api-keys'
+    | '/dashboard'
+    | '/faturas'
+    | '/notificacoes'
+    | '/perfil'
+    | '/servicos'
+    | '/tickets'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/contato'
     | '/planos'
     | '/privacidade'
+    | '/reset-password'
+    | '/sitemap.xml'
     | '/sobre'
     | '/status'
     | '/termos'
+    | '/_authenticated/api-keys'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/faturas'
+    | '/_authenticated/notificacoes'
+    | '/_authenticated/perfil'
+    | '/_authenticated/servicos'
+    | '/_authenticated/tickets'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ContatoRoute: typeof ContatoRoute
   PlanosRoute: typeof PlanosRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   StatusRoute: typeof StatusRoute
   TermosRoute: typeof TermosRoute
@@ -144,6 +276,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SobreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacidade': {
       id: '/privacidade'
       path: '/privacidade'
@@ -165,6 +311,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -172,14 +332,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/tickets': {
+      id: '/_authenticated/tickets'
+      path: '/tickets'
+      fullPath: '/tickets'
+      preLoaderRoute: typeof AuthenticatedTicketsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/servicos': {
+      id: '/_authenticated/servicos'
+      path: '/servicos'
+      fullPath: '/servicos'
+      preLoaderRoute: typeof AuthenticatedServicosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/perfil': {
+      id: '/_authenticated/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof AuthenticatedPerfilRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/notificacoes': {
+      id: '/_authenticated/notificacoes'
+      path: '/notificacoes'
+      fullPath: '/notificacoes'
+      preLoaderRoute: typeof AuthenticatedNotificacoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/faturas': {
+      id: '/_authenticated/faturas'
+      path: '/faturas'
+      fullPath: '/faturas'
+      preLoaderRoute: typeof AuthenticatedFaturasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/api-keys': {
+      id: '/_authenticated/api-keys'
+      path: '/api-keys'
+      fullPath: '/api-keys'
+      preLoaderRoute: typeof AuthenticatedApiKeysRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedApiKeysRoute: typeof AuthenticatedApiKeysRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedFaturasRoute: typeof AuthenticatedFaturasRoute
+  AuthenticatedNotificacoesRoute: typeof AuthenticatedNotificacoesRoute
+  AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
+  AuthenticatedServicosRoute: typeof AuthenticatedServicosRoute
+  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedApiKeysRoute: AuthenticatedApiKeysRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedFaturasRoute: AuthenticatedFaturasRoute,
+  AuthenticatedNotificacoesRoute: AuthenticatedNotificacoesRoute,
+  AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
+  AuthenticatedServicosRoute: AuthenticatedServicosRoute,
+  AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   ContatoRoute: ContatoRoute,
   PlanosRoute: PlanosRoute,
   PrivacidadeRoute: PrivacidadeRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   StatusRoute: StatusRoute,
   TermosRoute: TermosRoute,
