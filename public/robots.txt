@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /servicos
+Disallow: /faturas
+Disallow: /tickets
+Disallow: /perfil
+Disallow: /notificacoes
+Disallow: /api-keys
+Disallow: /auth
+Disallow: /reset-password
