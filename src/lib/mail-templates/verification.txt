@@ -1,0 +1,7 @@
+Seu código de verificação é: {{otp}}
+
+Expira em {{expires_in}} minutos.
+
+Acesse: {{action_link}}
+
+Se você não solicitou, ignore.

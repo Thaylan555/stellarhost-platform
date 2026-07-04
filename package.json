@@ -70,7 +70,8 @@
     "zod": "^3.24.2",
     "@sendgrid/mail": "^7.7.0",
     "bullmq": "^2.8.4",
-    "ioredis": "^5.3.2"
+    "ioredis": "^5.3.2",
+    "mjml": "^4.16.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",

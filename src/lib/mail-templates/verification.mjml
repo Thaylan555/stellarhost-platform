@@ -1,0 +1,30 @@
+<mjml>
+  <mj-body background-color="#0b0f14">
+    <mj-section padding="20px 0">
+      <mj-column>
+        <mj-image src="https://placehold.co/120x40?text=StellarHost" alt="StellarHost" width="120px" />
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#0f1720" padding="24px" border-radius="12px" css-class="card">
+      <mj-column>
+        <mj-text font-size="20px" color="#ffffff" font-weight="700">Código de Verificação</mj-text>
+        <mj-text font-size="16px" color="#9aa4b2">Seu código expira em {{expires_in}} minutos. Se não pediu, ignore.</mj-text>
+
+        <mj-divider border-color="#222834" />
+
+        <mj-text align="center" font-size="34px" color="#ffffff" font-weight="700" css-class="otp">{{otp}}</mj-text>
+
+        <mj-button background="linear-gradient(90deg,#7c5cff,#38d1ff)" color="#fff" href="{{action_link}}">Acessar conta</mj-button>
+
+        <mj-text font-size="12px" color="#99a0aa">Se não reconhece essa tentativa, <a href="{{support_link}}">contate o suporte</a>.</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section padding="12px 0">
+      <mj-column>
+        <mj-text font-size="12px" color="#99a0aa">© StellarHost</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
