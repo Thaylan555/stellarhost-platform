@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { Receipt } from "lucide-react";
 import { listMyInvoices } from "@/lib/dashboard.functions";
@@ -56,9 +56,13 @@ function InvoicesPage() {
               {invoices.map((inv) => {
                 const st = STATUS[inv.status] ?? { label: inv.status, cls: "bg-muted text-muted-foreground border-border" };
                 return (
-                  <tr key={inv.id} className="hover:bg-surface-2/50">
-                    <td className="px-6 py-4 font-mono text-xs">{inv.number}</td>
-                    <td className="px-6 py-4">{inv.description}</td>
+                  <tr key={inv.id} className="cursor-pointer hover:bg-surface-2/50">
+                    <td className="px-6 py-4 font-mono text-xs">
+                      <Link to="/faturas/$id" params={{ id: inv.id }} className="hover:text-brand">{inv.number}</Link>
+                    </td>
+                    <td className="px-6 py-4">
+                      <Link to="/faturas/$id" params={{ id: inv.id }}>{inv.description}</Link>
+                    </td>
                     <td className="px-6 py-4 text-muted-foreground">{formatDate(inv.due_at)}</td>
                     <td className="px-6 py-4">
                       <span className={cn("rounded-full border px-2.5 py-0.5 text-xs font-semibold", st.cls)}>{st.label}</span>
