@@ -1,0 +1,9 @@
+Bem-vindo ao StellarHost, {{name}}!
+
+Ative sua conta no link abaixo:
+
+{{activate_link}}
+
+Se você não se inscreveu, ignore este e-mail.
+
+— Equipe StellarHost
