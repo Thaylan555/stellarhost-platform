@@ -123,7 +123,7 @@ function PostPage() {
 
         <header className="mt-8">
           {data.category && (
-            <span className="inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: `${data.category.color}20`, color: data.category.color }}>
+            <span className="inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: `${data.category.color ?? "#8b5cf6"}20`, color: data.category.color ?? "#8b5cf6" }}>
               {data.category.name}
             </span>
           )}
