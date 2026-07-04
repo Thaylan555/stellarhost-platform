@@ -77,8 +77,8 @@ export function PlanCard({ plan }: { plan: PlanCardData }) {
       </ul>
 
       <Link
-        to="/auth"
-        search={{ mode: "signup" }}
+        to="/checkout/$planId"
+        params={{ planId: plan.id }}
         className={cn(
           "mt-8 w-full rounded-xl py-3 text-center text-sm font-bold transition-all",
           featured

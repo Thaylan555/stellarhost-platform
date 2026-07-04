@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { LifeBuoy, Plus } from "lucide-react";
 import { listMyTickets } from "@/lib/dashboard.functions";
@@ -48,9 +48,9 @@ function TicketsPage() {
           <h1 className="font-heading text-3xl font-bold">Suporte</h1>
           <p className="mt-1 text-sm text-muted-foreground">Abra um ticket para atendimento técnico ou financeiro.</p>
         </div>
-        <button className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-bold text-brand-foreground shadow-brand hover:brightness-110">
+        <Link to="/tickets/novo" className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-bold text-brand-foreground shadow-brand hover:brightness-110">
           <Plus className="size-4" /> Novo ticket
-        </button>
+        </Link>
       </header>
 
       {tickets.length === 0 ? (
@@ -63,7 +63,12 @@ function TicketsPage() {
           {tickets.map((t) => {
             const st = STATUS[t.status] ?? { label: t.status, cls: "bg-muted text-muted-foreground border-border" };
             return (
-              <article key={t.id} className="rounded-xl border border-border bg-surface p-5 hover:border-border/80">
+              <Link
+                to="/tickets/$id"
+                params={{ id: t.id }}
+                key={t.id}
+                className="block rounded-xl border border-border bg-surface p-5 transition-colors hover:border-brand/40"
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h3 className="font-semibold text-foreground">{t.subject}</h3>
@@ -74,7 +79,7 @@ function TicketsPage() {
                   </div>
                   <span className={cn("rounded-full border px-2.5 py-0.5 text-xs font-semibold", st.cls)}>{st.label}</span>
                 </div>
-              </article>
+              </Link>
             );
           })}
         </div>
