@@ -17,9 +17,13 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AjudaRouteImport } from './routes/ajuda'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AjudaSlugRouteImport } from './routes/ajuda.$slug'
 import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
 import { Route as AuthenticatedServicosRouteImport } from './routes/_authenticated/servicos'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
@@ -27,6 +31,10 @@ import { Route as AuthenticatedNotificacoesRouteImport } from './routes/_authent
 import { Route as AuthenticatedFaturasRouteImport } from './routes/_authenticated/faturas'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedApiKeysRouteImport } from './routes/_authenticated/api-keys'
+import { Route as AuthenticatedTicketsNovoRouteImport } from './routes/_authenticated/tickets.novo'
+import { Route as AuthenticatedTicketsIdRouteImport } from './routes/_authenticated/tickets.$id'
+import { Route as AuthenticatedFaturasIdRouteImport } from './routes/_authenticated/faturas.$id'
+import { Route as AuthenticatedCheckoutPlanIdRouteImport } from './routes/_authenticated/checkout.$planId'
 
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
@@ -68,9 +76,19 @@ const ContatoRoute = ContatoRouteImport.update({
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AjudaRoute = AjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -81,6 +99,16 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const AjudaSlugRoute = AjudaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => AjudaRoute,
 } as any)
 const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
   id: '/tickets',
@@ -118,10 +146,34 @@ const AuthenticatedApiKeysRoute = AuthenticatedApiKeysRouteImport.update({
   path: '/api-keys',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTicketsNovoRoute =
+  AuthenticatedTicketsNovoRouteImport.update({
+    id: '/novo',
+    path: '/novo',
+    getParentRoute: () => AuthenticatedTicketsRoute,
+  } as any)
+const AuthenticatedTicketsIdRoute = AuthenticatedTicketsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AuthenticatedTicketsRoute,
+} as any)
+const AuthenticatedFaturasIdRoute = AuthenticatedFaturasIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AuthenticatedFaturasRoute,
+} as any)
+const AuthenticatedCheckoutPlanIdRoute =
+  AuthenticatedCheckoutPlanIdRouteImport.update({
+    id: '/checkout/$planId',
+    path: '/checkout/$planId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRouteWithChildren
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/planos': typeof PlanosRoute
   '/privacidade': typeof PrivacidadeRoute
@@ -132,15 +184,23 @@ export interface FileRoutesByFullPath {
   '/termos': typeof TermosRoute
   '/api-keys': typeof AuthenticatedApiKeysRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
-  '/faturas': typeof AuthenticatedFaturasRoute
+  '/faturas': typeof AuthenticatedFaturasRouteWithChildren
   '/notificacoes': typeof AuthenticatedNotificacoesRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/servicos': typeof AuthenticatedServicosRoute
-  '/tickets': typeof AuthenticatedTicketsRoute
+  '/tickets': typeof AuthenticatedTicketsRouteWithChildren
+  '/ajuda/$slug': typeof AjudaSlugRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/checkout/$planId': typeof AuthenticatedCheckoutPlanIdRoute
+  '/faturas/$id': typeof AuthenticatedFaturasIdRoute
+  '/tickets/$id': typeof AuthenticatedTicketsIdRoute
+  '/tickets/novo': typeof AuthenticatedTicketsNovoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRouteWithChildren
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/planos': typeof PlanosRoute
   '/privacidade': typeof PrivacidadeRoute
@@ -151,17 +211,25 @@ export interface FileRoutesByTo {
   '/termos': typeof TermosRoute
   '/api-keys': typeof AuthenticatedApiKeysRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
-  '/faturas': typeof AuthenticatedFaturasRoute
+  '/faturas': typeof AuthenticatedFaturasRouteWithChildren
   '/notificacoes': typeof AuthenticatedNotificacoesRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/servicos': typeof AuthenticatedServicosRoute
-  '/tickets': typeof AuthenticatedTicketsRoute
+  '/tickets': typeof AuthenticatedTicketsRouteWithChildren
+  '/ajuda/$slug': typeof AjudaSlugRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/checkout/$planId': typeof AuthenticatedCheckoutPlanIdRoute
+  '/faturas/$id': typeof AuthenticatedFaturasIdRoute
+  '/tickets/$id': typeof AuthenticatedTicketsIdRoute
+  '/tickets/novo': typeof AuthenticatedTicketsNovoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/ajuda': typeof AjudaRouteWithChildren
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/planos': typeof PlanosRoute
   '/privacidade': typeof PrivacidadeRoute
@@ -172,17 +240,25 @@ export interface FileRoutesById {
   '/termos': typeof TermosRoute
   '/_authenticated/api-keys': typeof AuthenticatedApiKeysRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
-  '/_authenticated/faturas': typeof AuthenticatedFaturasRoute
+  '/_authenticated/faturas': typeof AuthenticatedFaturasRouteWithChildren
   '/_authenticated/notificacoes': typeof AuthenticatedNotificacoesRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/servicos': typeof AuthenticatedServicosRoute
-  '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
+  '/_authenticated/tickets': typeof AuthenticatedTicketsRouteWithChildren
+  '/ajuda/$slug': typeof AjudaSlugRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/_authenticated/checkout/$planId': typeof AuthenticatedCheckoutPlanIdRoute
+  '/_authenticated/faturas/$id': typeof AuthenticatedFaturasIdRoute
+  '/_authenticated/tickets/$id': typeof AuthenticatedTicketsIdRoute
+  '/_authenticated/tickets/novo': typeof AuthenticatedTicketsNovoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ajuda'
     | '/auth'
+    | '/blog'
     | '/contato'
     | '/planos'
     | '/privacidade'
@@ -198,10 +274,18 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/servicos'
     | '/tickets'
+    | '/ajuda/$slug'
+    | '/blog/$slug'
+    | '/checkout/$planId'
+    | '/faturas/$id'
+    | '/tickets/$id'
+    | '/tickets/novo'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ajuda'
     | '/auth'
+    | '/blog'
     | '/contato'
     | '/planos'
     | '/privacidade'
@@ -217,11 +301,19 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/servicos'
     | '/tickets'
+    | '/ajuda/$slug'
+    | '/blog/$slug'
+    | '/checkout/$planId'
+    | '/faturas/$id'
+    | '/tickets/$id'
+    | '/tickets/novo'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/ajuda'
     | '/auth'
+    | '/blog'
     | '/contato'
     | '/planos'
     | '/privacidade'
@@ -237,12 +329,20 @@ export interface FileRouteTypes {
     | '/_authenticated/perfil'
     | '/_authenticated/servicos'
     | '/_authenticated/tickets'
+    | '/ajuda/$slug'
+    | '/blog/$slug'
+    | '/_authenticated/checkout/$planId'
+    | '/_authenticated/faturas/$id'
+    | '/_authenticated/tickets/$id'
+    | '/_authenticated/tickets/novo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AjudaRoute: typeof AjudaRouteWithChildren
   AuthRoute: typeof AuthRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ContatoRoute: typeof ContatoRoute
   PlanosRoute: typeof PlanosRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
@@ -311,11 +411,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ajuda': {
+      id: '/ajuda'
+      path: '/ajuda'
+      fullPath: '/ajuda'
+      preLoaderRoute: typeof AjudaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -331,6 +445,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/ajuda/$slug': {
+      id: '/ajuda/$slug'
+      path: '/$slug'
+      fullPath: '/ajuda/$slug'
+      preLoaderRoute: typeof AjudaSlugRouteImport
+      parentRoute: typeof AjudaRoute
     }
     '/_authenticated/tickets': {
       id: '/_authenticated/tickets'
@@ -381,36 +509,112 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedApiKeysRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/tickets/novo': {
+      id: '/_authenticated/tickets/novo'
+      path: '/novo'
+      fullPath: '/tickets/novo'
+      preLoaderRoute: typeof AuthenticatedTicketsNovoRouteImport
+      parentRoute: typeof AuthenticatedTicketsRoute
+    }
+    '/_authenticated/tickets/$id': {
+      id: '/_authenticated/tickets/$id'
+      path: '/$id'
+      fullPath: '/tickets/$id'
+      preLoaderRoute: typeof AuthenticatedTicketsIdRouteImport
+      parentRoute: typeof AuthenticatedTicketsRoute
+    }
+    '/_authenticated/faturas/$id': {
+      id: '/_authenticated/faturas/$id'
+      path: '/$id'
+      fullPath: '/faturas/$id'
+      preLoaderRoute: typeof AuthenticatedFaturasIdRouteImport
+      parentRoute: typeof AuthenticatedFaturasRoute
+    }
+    '/_authenticated/checkout/$planId': {
+      id: '/_authenticated/checkout/$planId'
+      path: '/checkout/$planId'
+      fullPath: '/checkout/$planId'
+      preLoaderRoute: typeof AuthenticatedCheckoutPlanIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedFaturasRouteChildren {
+  AuthenticatedFaturasIdRoute: typeof AuthenticatedFaturasIdRoute
+}
+
+const AuthenticatedFaturasRouteChildren: AuthenticatedFaturasRouteChildren = {
+  AuthenticatedFaturasIdRoute: AuthenticatedFaturasIdRoute,
+}
+
+const AuthenticatedFaturasRouteWithChildren =
+  AuthenticatedFaturasRoute._addFileChildren(AuthenticatedFaturasRouteChildren)
+
+interface AuthenticatedTicketsRouteChildren {
+  AuthenticatedTicketsIdRoute: typeof AuthenticatedTicketsIdRoute
+  AuthenticatedTicketsNovoRoute: typeof AuthenticatedTicketsNovoRoute
+}
+
+const AuthenticatedTicketsRouteChildren: AuthenticatedTicketsRouteChildren = {
+  AuthenticatedTicketsIdRoute: AuthenticatedTicketsIdRoute,
+  AuthenticatedTicketsNovoRoute: AuthenticatedTicketsNovoRoute,
+}
+
+const AuthenticatedTicketsRouteWithChildren =
+  AuthenticatedTicketsRoute._addFileChildren(AuthenticatedTicketsRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedApiKeysRoute: typeof AuthenticatedApiKeysRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
-  AuthenticatedFaturasRoute: typeof AuthenticatedFaturasRoute
+  AuthenticatedFaturasRoute: typeof AuthenticatedFaturasRouteWithChildren
   AuthenticatedNotificacoesRoute: typeof AuthenticatedNotificacoesRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedServicosRoute: typeof AuthenticatedServicosRoute
-  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
+  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRouteWithChildren
+  AuthenticatedCheckoutPlanIdRoute: typeof AuthenticatedCheckoutPlanIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedApiKeysRoute: AuthenticatedApiKeysRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
-  AuthenticatedFaturasRoute: AuthenticatedFaturasRoute,
+  AuthenticatedFaturasRoute: AuthenticatedFaturasRouteWithChildren,
   AuthenticatedNotificacoesRoute: AuthenticatedNotificacoesRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedServicosRoute: AuthenticatedServicosRoute,
-  AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
+  AuthenticatedTicketsRoute: AuthenticatedTicketsRouteWithChildren,
+  AuthenticatedCheckoutPlanIdRoute: AuthenticatedCheckoutPlanIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface AjudaRouteChildren {
+  AjudaSlugRoute: typeof AjudaSlugRoute
+}
+
+const AjudaRouteChildren: AjudaRouteChildren = {
+  AjudaSlugRoute: AjudaSlugRoute,
+}
+
+const AjudaRouteWithChildren = AjudaRoute._addFileChildren(AjudaRouteChildren)
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AjudaRoute: AjudaRouteWithChildren,
   AuthRoute: AuthRoute,
+  BlogRoute: BlogRouteWithChildren,
   ContatoRoute: ContatoRoute,
   PlanosRoute: PlanosRoute,
   PrivacidadeRoute: PrivacidadeRoute,
